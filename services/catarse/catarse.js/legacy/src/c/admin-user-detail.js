@@ -17,6 +17,7 @@ import adminResetPassword from './admin-reset-password';
 import adminInputAction from './admin-input-action';
 import adminNotificationHistory from './admin-notification-history';
 import adminUserBalanceTransactionsList from './admin-user-balance-transactions-list';
+import adminTransferBalance from './admin-transfer-balance';
 import h from '../h';
 import { catarse } from '../api';
 
@@ -49,6 +50,20 @@ const adminUserDetail = {
                     outerLabel: 'Reativar usuário',
                     forceValue: null,
                     model: models.user
+                },
+                transfer: {
+                    property: 'balance_transaction',
+                    propertySender: 'from_user_id',
+                    propertyAmount: 'amount',
+                    propertyReceiver: 'to_user_id',
+                    callToAction: 'Próximo passo',
+                    innerLabelUserId: 'ID de Usuário do Destinatário:',
+                    innerLabelBalance: 'Valor:',
+                    innerLabelBalanceInfo: 'Para transferir o saldo total, deixe este campo em branco.',
+                    outerLabel: 'Transferir saldo',
+                    placeholderUserId: 'ex: 123',
+                    placeholderBalance: 'R$ 0,00',
+                    model: models.user
                 }
             },
         };
@@ -68,6 +83,12 @@ const adminUserDetail = {
                     url: (`/users/${id}/new_password`),
                     method: 'POST'
                 }
+            }),
+            transferBalance = (builder, id) => _.extend({}, builder, {
+                requestOptions: {
+                    url: (`admin/balance_transactions/transfer_balance`),
+                    method: 'POST'
+                }
             });
 
         return m('#admin-contribution-detail-box', [
@@ -79,6 +100,10 @@ const adminUserDetail = {
                 }),
                 m(adminExternalAction, {
                     data: banUser(actions.ban, item.id),
+                    item
+                }),
+                m(adminTransferBalance, {
+                    data: transferBalance(actions.transfer, item.id),
                     item
                 }),
                 (item.deactivated_at) ?

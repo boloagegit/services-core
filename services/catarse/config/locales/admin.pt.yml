@@ -200,6 +200,22 @@ pt:
       charts:
         current_period: "Últimas 8 sem."
         last_year: "Ano anterior"
+    balance_transactions:
+      transfer_success: "Transferência realizada com sucesso."
+      invalid_amount: "Valor inválido."
+      insufficient_balance: "Saldo insuficiente."
+      view:
+        data_confirmation: "Confirme se os dados abaixo estão corretos:"
+        amount: "Valor:"
+        sender: "De:"
+        receiver: "Para:"
+        confirm: "Confirmar"
+        back: "Voltar"
+        error: "Ocorreu um erro ao processar a transferência. Detalhes: "
+        check_balance: "Ver saldo"
+        success: "Transferência realizada"
+        current_balance: "Saldo atual"
+        receiver_id: "Id do destinatário:"
   channels:
     admin:
       <<: *admin
