@@ -361,8 +361,7 @@ class User < ActiveRecord::Base
   end
 
   def to_param
-    return id.to_s unless display_name
-    "#{id}-#{display_name.parameterize}"
+    id.to_s
   end
 
   def project_unsubscribes
